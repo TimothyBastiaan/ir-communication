@@ -29,6 +29,29 @@ enum Power {
 //% color=#0fbc11 icon="\uf1eb" block="Nikola AC remote "
 namespace NikolaIRSender 
 {   
+    let prtcl = IrProtocol.Sharp;
+    let fspd = FanSpeed.Low;
+    let temp =  25;
+    let pwr = Power.On;
+
+    export function sendingcommand(protocol: IrProtocol, fan: FanSpeed, temperature: number, power: Power): void {
+
+        let message = ""
+
+        if (protocol < 10) { message = message + "0" }
+
+        if (temperature < 16) {
+            temperature = 16
+        }
+        else if (temperature > 30) {
+            temperature = 30
+        }
+
+        message = message + protocol + fan + temperature + power
+
+        serial.writeString(message)
+        basic.pause(1000)
+    }
 
     /**
     * @param tx_pin the new transmission pin, eg: SerialPin.P0
@@ -42,34 +65,63 @@ namespace NikolaIRSender
         serial.redirect(tx_pin, rx_pin, 115200)
     }
     /**
-    * @param protocol the new transmission pin, eg: IrProtocol.Sharp
-    * @param fan the new reception pin, eg: FanSpeed.Low
-    * @param temp the new reception pin, eg: 16
-    * @param power the new reception pin, eg: On
+    * @param protocol, eg: IrProtocol.Sharp
+    * @param fan , eg: FanSpeed.Low
+    * @param temp , eg: 16
+    * @param power, eg: On
     */
-    //% blockId="IR sending" block="sending AC command with protocol %protocol fan speed %fan temp %temp power %power"
+    //% blockId="IR sending packet" block="sending AC command with protocol %protocol fan speed %fan temp %temp power %power"
     //% weight=90 
     //% temp.min = 16 temp.max = 30 
     //% parts="nikolaIR_sender"
-    export function sending(protocol: IrProtocol, fan: FanSpeed , temp: number, power : Power): void
+    export function sendingpacket(protocol: IrProtocol, fan: FanSpeed , temperature: number, power : Power): void
     {
-        let message =""
-
-        if ( protocol  < 10)
-        {message = message + "0"}
-
-        if(temp < 16)
-        {
-            temp = 16
-        }
-        else if (temp > 30) 
-        {
-            temp = 30
-        }
-
-        message = message + protocol + fan + temp + power
-        
-        serial.writeString(message)
-        basic.pause(1000)
+       sendingcommand(protocol,fan,temperature,power)
     }
+    
+    //% blockId="IR sending individual" block="sending AC command "
+    //% weight=90 
+    //% parts="nikolaIR_sender"
+    export function sendingIndividual(): void {
+        sendingcommand(prtcl, fspd, temp, pwr)
+    }
+
+    /**
+    * @param protocol the new transmission pin, eg: IrProtocol.Sharp
+    */
+
+    //% blockId="IR Setting Protocol" block="setting AC command with protocol %protocol"
+    //% weight=90 
+    //% parts="nikolaIR_sender"
+    export function setprotocol (protocol: IrProtocol) 
+    {
+        prtcl = protocol
+    }
+    /**
+    * @param fan the new reception pin, eg: FanSpeed.Low
+    */
+    //% blockId="IR Setting fan speed" block="setting AC command with fan speed %fan"
+    //% weight=90 
+    //% parts="nikolaIR_sender"
+    export function setfan(fan: FanSpeed) {
+        fspd = fan
+    }
+    /**
+    * @param temp the new reception pin, eg: 16
+    */
+    //% blockId="IR Setting temperature" block="setting AC command with temp %temp "
+    //% weight=90 
+    //% parts="nikolaIR_sender"
+    export function settemp(temperature: number) {
+        temp = temperature
+    }
+    /**
+    * @param power the new reception pin, eg: On
+    */
+    //% blockId="IR Setting power" block="setting AC command with power %power"
+    //% weight=90 
+    //% parts="nikolaIR_sender"
+    export function setpower(power: Power) {
+        pwr=power
+      } 
 }
