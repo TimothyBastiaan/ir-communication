@@ -67,7 +67,7 @@ namespace NikolaIRSender
     /**
     * @param protocol, eg: IrProtocol.Sharp
     * @param fan , eg: FanSpeed.Low
-    * @param temp , eg: 16
+    * @param temperature , eg: 16
     * @param power, eg: On
     */
     //% blockId="IR sending packet" block="sending AC command with protocol %protocol fan speed %fan temp %temp power %power"
@@ -107,7 +107,7 @@ namespace NikolaIRSender
         fspd = fan
     }
     /**
-    * @param temp the new reception pin, eg: 16
+    * @param temperature the new reception pin, eg: 16
     */
     //% blockId="IR Setting temperature" block="setting AC command with temp %temp "
     //% weight=90 
