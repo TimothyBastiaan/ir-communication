@@ -84,6 +84,7 @@ namespace NikolaIRSender
     //% parts="nikolaIR_sender"
     export function sendingIndividual(): void {
         sendingcommand(prtcl, fspd, temp, pwr)
+        basic.pause(100)
     }
 
     /**
