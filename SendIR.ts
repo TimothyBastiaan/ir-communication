@@ -6,7 +6,7 @@ enum IrProtocol {
     //% block="Panasonic"
     Panasonic = 3,
     //% block="Sony"
-    Sony = 3,
+    Sony = 4,
     // Add more protocols as needed
 }
 enum FanSpeed {
