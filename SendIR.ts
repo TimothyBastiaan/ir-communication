@@ -7,6 +7,23 @@ enum IrProtocol {
     Panasonic = 3,
     //% block="Sony"
     Sony = 4,
+    //% block="Daikin"
+    Daikin = 5,
+    //% block="Daikin128"
+    Daikin128 = 6,
+    //% block="Daikin152"
+    Daikin152 = 7,
+    //% block="Daikin160"
+    Daikin160 = 8,
+    //% block="Daikin176"
+    Daikin176 = 9,
+    //% block="Daikin2"
+    Daikin2 = 10,
+    //% block="Daikin216"
+    Daikin216 = 11,
+    //% block="Daikin64"
+    Daikin64 = 12,
+    
     // Add more protocols as needed
 }
 enum FanSpeed {
