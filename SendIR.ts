@@ -23,7 +23,8 @@ enum IrProtocol {
     Daikin216 = 11,
     //% block="Daikin64"
     Daikin64 = 12,
-    
+    //% block="Gree"
+    Gree = 13,
     // Add more protocols as needed
 }
 enum FanSpeed {
